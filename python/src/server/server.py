@@ -76,11 +76,6 @@ class EchoHandler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def process_echo_request(self, request_body):
-        # Artificial "One in a million" bug. {*}
-        #with open("/dev/urandom", "rb") as f:
-            #r = int.from_bytes(f.read(4), "big")
-            #if r % 1_000_000 == 0:
-                #return "Surprise!".encode("utf-8")
         # Correct response:
         return request_body
 
@@ -94,7 +89,8 @@ class EchoHandler(BaseHTTPRequestHandler):
         EchoHandler.RECENT_REQUESTS.append(request_body)
         # Only retain the most recent MAX_RECENT_REQUESTS requests
         if len(EchoHandler.RECENT_REQUESTS) > EchoHandler.MAX_RECENT_REQUESTS:
-            EchoHandler.RECENT_REQUESTS[-EchoHandler.MAX_RECENT_REQUESTS:] # {*}
+            EchoHandler.RECENT_REQUESTS = EchoHandler.RECENT_REQUESTS[-EchoHandler.MAX_RECENT_REQUESTS:] # {*}
+            
 
     @classmethod
     def print_last_request(cls, n):
