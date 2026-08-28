@@ -1,6 +1,6 @@
 import requests
 
-DEFAULT_TIMEOUT=(20, 20) # Connect and read timeouts # {*}
+DEFAULT_TIMEOUT=(3, 3) # Connect and read timeouts # {*}
 
 class Client:
     def __init__(self, host="127.0.0.1", port=7000):
